@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+const products = require('./data/products')
 
 const token = '5756599852:AAF2AcGhYNOAC3gMB1bCdUEnIoY1CnKU0Fw';
 const webAppUrl = 'https://shimmering-belekoy-c380cc.netlify.app';
@@ -11,11 +12,20 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get('/api/products', (req, res) => {
+    res.json(products)
+})
+
+app.get('/api/products/:id', (req, res) => {
+    const product = products.find(p => p.id === req.params.id)
+    res.json(product)
+})
+
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
 
-    if(text === '/start') {
+    if (text === '/start') {
         await bot.sendMessage(chatId, 'Ниже появится кнопка, заполни форму', {
             reply_markup: {
                 keyboard: [
@@ -33,7 +43,7 @@ bot.on('message', async (msg) => {
         })
     }
 
-    if(msg?.web_app_data?.data) {
+    if (msg?.web_app_data?.data) {
         try {
             const data = JSON.parse(msg?.web_app_data?.data)
             console.log(data)
