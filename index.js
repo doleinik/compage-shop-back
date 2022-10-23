@@ -5,6 +5,7 @@ const products = require('./data/products')
 
 const token = '5756599852:AAF2AcGhYNOAC3gMB1bCdUEnIoY1CnKU0Fw';
 const webAppUrl = 'https://shimmering-belekoy-c380cc.netlify.app';
+const groupId = '-665180888';
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -50,6 +51,7 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
             await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country);
             await bot.sendMessage(chatId, 'Ваша улица: ' + data?.street);
+            await bot.sendMessage(groupId, 'User: ' + data?.username + 'Ваша улица: ' + data?.street + 'Ваша страна' + data?.country);
 
             setTimeout(async () => {
                 await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
