@@ -33,6 +33,7 @@ bot.on('message', async (msg) => {
                     [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}]
                 ]
             }
+
         })
 
         await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже', {
@@ -51,14 +52,15 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
             await bot.sendMessage(chatId, 'User: ' + data?.user);
             await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country);
-            await bot.sendMessage(chatId, 'Ваша улица: ' + msg?.web_app_data?.data);
-            await bot.sendMessage(groupId, 'User: ' + data?.user + ' Ваша улица: ' + data?.street + ' Ваша страна' + data?.country);
+            await bot.sendMessage(chatId, 'Ваша улица: ');
+            // await bot.sendMessage(groupId, 'User: ' + data?.user + ' Ваша улица: ' + data?.street + ' Ваша страна' + data?.country);
 
             setTimeout(async () => {
                 await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
             }, 3000)
         } catch (e) {
             console.log(e);
+
         }
     }
 });
