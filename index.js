@@ -30,6 +30,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Ниже появится кнопка, заполни форму', {
             reply_markup: {
                 keyboard: [
+                    [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}],
                     [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}]
                 ]
             }
@@ -43,26 +44,26 @@ bot.on('message', async (msg) => {
                 ]
             }
         })
-    }
+        if (msg?.web_app_data?.data) {
+            try {
+                const data = JSON.parse(msg?.web_app_data?.data)
+                console.log(msg?.web_app_data?.data)
+                await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
+                await bot.sendMessage(chatId, 'User: ' + data?.name);
+                await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country);
+                await bot.sendMessage(chatId, 'Ваша улица: ');
+                // await bot.sendMessage(groupId, 'User: ' + data?.user + ' Ваша улица: ' + data?.street + ' Ваша страна' + data?.country);
 
-    if (msg?.web_app_data?.data) {
-        try {
-            const data = JSON.parse(msg?.web_app_data?.data)
-            console.log(msg?.web_app_data?.data)
-            await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
-            await bot.sendMessage(chatId, 'User: ' + data?.user);
-            await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country);
-            await bot.sendMessage(chatId, 'Ваша улица: ');
-            // await bot.sendMessage(groupId, 'User: ' + data?.user + ' Ваша улица: ' + data?.street + ' Ваша страна' + data?.country);
-
-            setTimeout(async () => {
-                await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
-            }, 3000)
-        } catch (e) {
-            console.log(e);
-
+                setTimeout(async () => {
+                    await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
+                }, 3000)
+            } catch (e) {
+                console.log(e);
+            }
         }
+
     }
+
 });
 
 app.post('/web-data', async (req, res) => {
