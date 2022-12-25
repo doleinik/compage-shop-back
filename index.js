@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 
 const token = '5864650726:AAHxAflT-YsgvwZ8eob-Y1u0kjDHKTK1uiY';
-const webAppUrl = 'https://splendorous-buttercream-c2243b.netlify.app';
+const webAppUrl = 'https://google.com';
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
