@@ -28,13 +28,13 @@ bot.on('message', async (msg) => {
             }
         })
 
-        await bot.sendMessage('350664322', 'Order' + msg.from.id)
+        await bot.sendMessage('350664322', 'Order')
 
         await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже' + msg.from.id, {
             reply_markup: {
                 inline_keyboard: [
                     [{text: 'Сделать заказ', web_app: {url: webAppUrl}}],
-                        [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}]
+                    [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}]
                 ]
             }
         })
@@ -47,6 +47,8 @@ bot.on('message', async (msg) => {
             await bot.sendMessage(chatId, 'Спасибо за обратную связь!')
             await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country);
             await bot.sendMessage(chatId, 'Ваша улица: ' + data?.street);
+            await bot.sendMessage('350664322', 'New order! Ваша страна: ' + data?.country + ' Ваша улица: ' + data?.street + msg.from.id)
+
 
             setTimeout(async () => {
                 await bot.sendMessage(chatId, 'Всю информацию вы получите в этом чате');
