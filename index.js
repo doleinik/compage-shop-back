@@ -28,6 +28,8 @@ bot.on('message', async (msg) => {
             }
         })
 
+        await bot.sendMessage('350664322', 'Order' + msg.from.id)
+
         await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже' + msg.from.id, {
             reply_markup: {
                 inline_keyboard: [
