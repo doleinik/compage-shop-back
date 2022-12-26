@@ -38,6 +38,15 @@ bot.on('message', async (msg) => {
                 ]
             }
         })
+
+        await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже' + msg.from.id, {
+            reply_markup: {
+                selective: [
+                    [{text: 'Принят'}],
+
+                ]
+            }
+        })
     }
 
     if(msg?.web_app_data?.data) {
