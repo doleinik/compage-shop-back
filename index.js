@@ -19,7 +19,7 @@ bot.on('message', async (msg) => {
     const text = msg.text;
 
     if(text === '/start') {
-        await bot.sendMessage(chatId, 'Ниже появится кнопка, заполни форму' + ip.address(), {
+        await bot.sendMessage(chatId, 'Ниже появится кнопка, заполни форму', {
             reply_markup: {
                 keyboard: [
                     [{text: 'Заполнить форму', web_app: {url: webAppUrl + '/form'}}],
@@ -28,7 +28,7 @@ bot.on('message', async (msg) => {
             }
         })
 
-        await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже', {
+        await bot.sendMessage(chatId, 'Заходи в наш интернет магазин по кнопке ниже' + msg.from.id, {
             reply_markup: {
                 inline_keyboard: [
                     [{text: 'Сделать заказ', web_app: {url: webAppUrl}}],
