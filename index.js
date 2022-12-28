@@ -84,9 +84,6 @@ bot.on('message', async (msg) => {
 });
 
 
-const PORT = 8000;
-
-app.listen(PORT, () => console.log('server started on PORT ' + PORT))
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = [], totalPrice} = req.body;
@@ -106,5 +103,9 @@ app.post('/web-data', async (req, res) => {
         return res.status(500).json({})
     }
 })
+
+const PORT = 8000;
+
+app.listen(PORT, () => console.log('server started on PORT ' + PORT))
 
 
