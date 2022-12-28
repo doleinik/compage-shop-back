@@ -18,7 +18,7 @@ let message = '';
 app.use(express.json());
 app.use(cors());
 
-bot.on('messageCreate', async (msg) => {
+bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
     message = msg.text;
@@ -101,7 +101,6 @@ app.post('/web-data', async (req, res) => {
         return res.status(500).json({})
     }
 })
-
 const PORT = 8000;
 
 app.listen(PORT, () => console.log('server started on PORT ' + PORT))
