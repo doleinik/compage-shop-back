@@ -18,7 +18,7 @@ let message = '';
 app.use(express.json());
 app.use(cors());
 
-bot.on('message', async (msg) => {
+bot.on('messageCreate', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
     message = msg.text;
@@ -87,21 +87,17 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = [], totalPrice} = req.body;
-    await bot.sendMessage(user_id, 'Ваше замовлення доставленно');
-
     try {
-        await bot.answerWebAppQuery(admin_id, {
+        await bot.answerWebAppQuery(queryId, {
             type: 'article',
-            id: admin_id,
+            id: queryId,
             title: 'Успешная покупка',
             input_message_content: {
                 message_text: ` Поздравляю с покупкой, вы приобрели товар на сумму ${totalPrice}, ${products.map(item => item.title).join(', ')}`
             }
         })
-        res.end();
         return res.status(200).json({});
     } catch (e) {
-        res.end();
         return res.status(500).json({})
     }
 })
